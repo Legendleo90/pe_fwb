@@ -93,6 +93,8 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
 
     private BatteryEstimateFetcher mBatteryEstimateFetcher;
 
+    private boolean mIsQsHeader;
+
     public BatteryMeterView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
@@ -153,6 +155,10 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
         transition.setAnimator(LayoutTransition.CHANGING, null);
 
         setLayoutTransition(transition);
+    }
+
+    public void setIsQsHeader(boolean isQs) {
+        mIsQsHeader = isQs;
     }
 
     public void setForceShowPercent(boolean show) {
@@ -338,7 +344,7 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
                 || mShowPercentMode == MODE_ESTIMATE;
         shouldShow = shouldShow && !mBatteryStateUnknown;
 
-        if (shouldShow) {
+        if (shouldShow || mIsQsHeader) {
             if (!showing) {
                 mBatteryPercentView = loadPercentView();
                 if (mPercentageStyleId != 0) { // Only set if specified as attribute
