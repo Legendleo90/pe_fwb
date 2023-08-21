@@ -286,6 +286,8 @@ constructor(
                 Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0
             )
         }
+
+        batteryIcon.setIsQsHeader(true)
     }
 
     override fun onViewAttached() {
